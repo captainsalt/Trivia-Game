@@ -1,1 +1,40 @@
-﻿
+﻿.container {
+    width: 97%;
+    margin: 0 auto;
+}
+
+.quizContainer {
+    width: 60%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+#question {
+    font-weight: bold;
+    font-size: 200%;
+    text-align: center;
+    margin: 0 0 20px 0;
+}
+
+[id^=choice] {
+    background: #eee;
+    border-radius: 20px;
+    border: 1px double grey;
+    font-size: 150%;
+    overflow-wrap: break-word;
+}
+
+.btn {
+    float: right;
+}
+
+#choice2,
+#choice4 {
+    float: right;
+}
+
+.row>[id^=choice] {
+    margin: 10px;
+}

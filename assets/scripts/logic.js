@@ -1,1 +1,10 @@
-﻿
+﻿$(document).ready(function() {
+
+
+
+
+
+
+
+
+});
