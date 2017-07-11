@@ -1,6 +1,6 @@
 ﻿$(document).ready(function() {
-    var c1 = $("#choice1");
-    c1.html("Sup"); 
+    var game = new Game(quizJson.quiz1);
+    
 });
 
 //pass in quiz 1, 2 etc
@@ -10,8 +10,10 @@ function Game(quiz) {
     this.question = this.quiz[this.index].question;
     this.answers = this.quiz[this.index].answers;
     this.correctAnswer = this.quiz[this.index].correctAnswer;
+    this.questionsLeft = this.quiz.length;
     this.nextQuestion = () => {
         this.index++;
+        this.questionsLeft--;
         this.question = this.quiz[this.index].question;
         this.answers = this.quiz[this.index].answers;
         this.correctAnswer = this.quiz[this.index].correctAnswer;
@@ -30,7 +32,6 @@ var quizJson = {
             "question": "What is 2 + 2?",
             "answers": ["1", "2", "8", "4"],
             "correctAnswer": "4"
-
         },
         {
             "questionNumber": 3,
@@ -58,7 +59,9 @@ var quizJson = {
 }
 
 var timer = {
-    start: () => {},
+    start: () => {
+
+    },
     stop: () => {
 
     }
