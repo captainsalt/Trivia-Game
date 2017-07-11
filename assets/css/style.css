@@ -11,10 +11,13 @@
     border-radius: 10px;
 }
 
-#question {
+#submitButton {
+    float: right;
+}
+
+#question, #timer {
     font-weight: bold;
     font-size: 200%;
-    text-align: center;
     margin: 0 0 20px 0;
 }
 
@@ -24,10 +27,6 @@
     border: 1px double grey;
     font-size: 150%;
     overflow-wrap: break-word;
-}
-
-.btn {
-    float: right;
 }
 
 #choice2,
