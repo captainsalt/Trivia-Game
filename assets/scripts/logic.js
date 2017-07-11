@@ -1,6 +1,49 @@
-﻿$(document).ready(function() {
+﻿$(document).ready(() => {
     var game = new Game(quizJson.quiz1);
-    
+    var choiceElements = $("[id^=choice]").get();
+    populateQuiz();
+
+    //get which block user selected
+
+    //Selection css
+    $(choiceElements)
+        .mouseenter(e => $(e.currentTarget).css("background", "#eee"))
+        .mouseleave(e => $(e.currentTarget).css("background", "white"));
+
+    //selection handler
+    $(choiceElements).click(function() {
+        //set selected element color
+        $(this).hover(e => {
+            $(e.currentTarget);
+        });
+    });
+
+    //next button handler
+    $("#nextButton").click(() => {
+        game.nextQuestion();
+        $("#questionsLeft").html(game.questionsLeft);
+        populateQuiz();
+    });
+
+    //populates the quiz objext
+    function populateQuiz() {
+        //populate question
+        var question = $("#question");
+        question.html(game.question);
+
+        //populate questions left
+        $("#questionsLeft").html(game.questionsLeft);
+
+        //get all of the choices elements
+        var choices = $("[id^=choice]").get();
+        var answerChoiceIndex = 0;
+
+        //popuate the answer choices
+        for (var i = 0; i < choices.length; i++) {
+            var element = $(choices[i]);
+            element.html(game.answers[answerChoiceIndex++]);
+        }
+    }
 });
 
 //pass in quiz 1, 2 etc

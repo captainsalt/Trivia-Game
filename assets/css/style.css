@@ -6,14 +6,6 @@
     overflow-wrap: break-word;
 }
 
-*[id^=choice]:hover {
-    background: gray;
-}
-
-*[id^=choice]:active {
-    background: black;
-}
-
 body {
     background: url("../images/argyle.png");
 }
@@ -28,14 +20,14 @@ h1 {
     width: 97%;
 }
 
-.questionCount {
+.questionCountContainer {
     float: right;
     width: 50%;
 }
 
 .quizContainer,
 .scoreContainer,
-.questionCount {
+.questionCountContainer {
     background: url("../images/paper.png");
     background: white;
     border: 1px solid grey;
@@ -78,6 +70,6 @@ h1 {
     margin: 0 0 20px 0;
 }
 
-#submitButton {
+#nextButton {
     float: right;
 }
