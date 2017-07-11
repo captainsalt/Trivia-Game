@@ -1,48 +1,58 @@
-﻿body {
-    background: url("../images/argyle.png");
-}
-
-.container {
-    width: 97%;
-    margin: 0 auto;
-}
-
-.quizContainer,
-.scoreContainer {
-    margin: 20px 0 0 0;
-    padding: 20px;
-    border: 1px solid grey;
-    border-radius: 10px;
+*[id^=choice] {
     background: white;
-    background: url("../images/paper.png");
-}
-
-.scoreContainer {
-    width: 50%;
-    float: left;
-}
-
-#submitButton {
-    float: right;
-}
-
-#question,
-#timer {
-    font-weight: bold;
-    font-size: 200%;
-    margin: 0 0 20px 0;
-}
-
-[id^=choice] {
-    background: white;
-    border-radius: 20px;
     border: 1px double grey;
+    border-radius: 3px;
     font-size: 150%;
     overflow-wrap: break-word;
 }
 
-[id^=choice]:hover {
+*[id^=choice]:hover {
     background: gray;
+}
+
+body {
+    background: url("../images/argyle.png");
+}
+
+h1 {
+    color: white;
+    text-align: center;
+}
+
+.container {
+    margin: 0 auto;
+    width: 97%;
+}
+
+.questionCount {
+    float: right;
+    width: 50%;
+}
+
+.quizContainer,
+.scoreContainer,
+.questionCount {
+    background: url("../images/paper.png");
+    background: white;
+    border: 1px solid grey;
+    border-radius: 10px;
+    margin: 20px 0 0 0;
+    padding: 20px;
+}
+
+.row>[id^=choice] {
+    margin: 10px;
+}
+
+.scoreContainer {
+    float: left;
+    width: 50%;
+}
+
+.stats {
+    font-size: 200%;
+    font-weight: bold;
+    text-align: center;
 }
 
 #choice2,
@@ -50,6 +60,13 @@
     float: right;
 }
 
-.row>[id^=choice] {
-    margin: 10px;
+#question,
+#timer {
+    font-size: 200%;
+    font-weight: bold;
+    margin: 0 0 20px 0;
+}
+
+#submitButton {
+    float: right;
 }
