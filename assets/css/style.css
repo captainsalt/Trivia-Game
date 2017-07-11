@@ -1,32 +1,48 @@
-﻿.container {
+﻿body {
+    background: url("../images/argyle.png");
+}
+
+.container {
     width: 97%;
     margin: 0 auto;
 }
 
-.quizContainer {
-    width: 60%;
-    margin: 0 auto;
+.quizContainer,
+.scoreContainer {
+    margin: 20px 0 0 0;
     padding: 20px;
-    border: 1px solid black;
+    border: 1px solid grey;
     border-radius: 10px;
+    background: white;
+    background: url("../images/paper.png");
+}
+
+.scoreContainer {
+    width: 50%;
+    float: left;
 }
 
 #submitButton {
     float: right;
 }
 
-#question, #timer {
+#question,
+#timer {
     font-weight: bold;
     font-size: 200%;
     margin: 0 0 20px 0;
 }
 
 [id^=choice] {
-    background: #eee;
+    background: white;
     border-radius: 20px;
     border: 1px double grey;
     font-size: 150%;
     overflow-wrap: break-word;
+}
+
+[id^=choice]:hover {
+    background: gray;
 }
 
 #choice2,
