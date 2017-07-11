@@ -18,8 +18,10 @@
 
         <!--Quiz Container -->
         <div class="quizContainer">
+            
             <!--First row-->
             <div class="row">
+
                 <!--Question -->
                 <div class="col-lg-10" id="question">
                     What is the current time?
@@ -33,24 +35,25 @@
 
             <!-- Question container -->
             <div class="questionContainer">
+
                 <!--First row of questions-->
                 <div class="row">
-                    <div class="col-lg-5" id="choice1">
+                    <div class="col-lg-5" id="choice1" selected="false">
                         What is the current time?
                     </div>
 
-                    <div class="col-lg-5" id="choice2">
+                    <div class="col-lg-5" id="choice2" selected="false">
                         What is the current time?
                     </div>
                 </div>
 
                 <!--Second row of questions-->
                 <div class="row">
-                    <div class="col-lg-5" id="choice3">
+                    <div class="col-lg-5" id="choice3" selected="false">
                         What is the current time?
                     </div>
 
-                    <div class="col-lg-5" id="choice4">
+                    <div class="col-lg-5" id="choice4" selected="false">
                         What is the current time?
                     </div>
                 </div>
@@ -59,7 +62,7 @@
             <!--Next button-->
             <div class="row">
                 <div class="col-lg-12">
-                    <button type="submit" id="submitButton">Next Question</button>
+                    <button type="submit" id="nextButton">Next Question</button>
                 </div>
             </div>
         </div>
@@ -67,13 +70,13 @@
         <!--Score Container-->
         <div class="scoreContainer">
             <p class="stats">Percent Correct</p>
-            <p class="stats">XX.XX%</p>
+            <p class="stats" id="percentage">0.00%</p>
         </div>
 
         <!--Question Count-->
-        <div class="questionCount">
+        <div class="questionCountContainer">
             <p class="stats">Questions Left</p>
-            <p class="stats">99</p>
+            <p class="stats" id="questionsLeft">99</p>
         </div>
     </div>
     <script type="text/javascript" src="assets/scripts/logic.js"></script>
