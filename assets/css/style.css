@@ -10,6 +10,10 @@
     background: gray;
 }
 
+*[id^=choice]:active {
+    background: black;
+}
+
 body {
     background: url("../images/argyle.png");
 }

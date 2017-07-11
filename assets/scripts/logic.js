@@ -1,9 +1,10 @@
 ﻿$(document).ready(function() {
-    
+    var c1 = $("#choice1");
+    c1.html("Sup"); 
 });
 
 //pass in quiz 1, 2 etc
-function gameConstructor(quiz) {
+function Game(quiz) {
     this.quiz = quiz;
     this.index = 0;
     this.question = this.quiz[this.index].question;
