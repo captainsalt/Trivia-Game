@@ -1,5 +1,5 @@
 ﻿$(document).ready(function() {
-    console.log(quizJson);
+    timer.start();
 });
 
 var quizJson = {
@@ -39,4 +39,12 @@ var quizJson = {
     "quiz2": [{
 
     }]
+}
+
+var timer = {
+    start: () => {
+    },
+    stop: () => {
+
+    }
 }

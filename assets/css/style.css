@@ -42,6 +42,8 @@ h1 {
 
 .row>[id^=choice] {
     margin: 10px;
+    padding: 50px;
+    text-align: center;
 }
 
 .scoreContainer {
@@ -58,6 +60,11 @@ h1 {
 #choice2,
 #choice4 {
     float: right;
+}
+
+#choice1,
+#choice3 {
+float: left;
 }
 
 #question,
