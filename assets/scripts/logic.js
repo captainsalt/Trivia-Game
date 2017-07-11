@@ -1,18 +1,33 @@
 ﻿$(document).ready(function() {
-    timer.start();
+    
 });
+
+//pass in quiz 1, 2 etc
+function gameConstructor(quiz) {
+    this.quiz = quiz;
+    this.index = 0;
+    this.question = this.quiz[this.index].question;
+    this.answers = this.quiz[this.index].answers;
+    this.correctAnswer = this.quiz[this.index].correctAnswer;
+    this.nextQuestion = () => {
+        this.index++;
+        this.question = this.quiz[this.index].question;
+        this.answers = this.quiz[this.index].answers;
+        this.correctAnswer = this.quiz[this.index].correctAnswer;
+    }
+}
 
 var quizJson = {
     "quiz1": [{
             "questionNumber": 1,
             "question": "What is 1 + 1?",
-            "answers": ["1", "2", "3", "4"],
+            "answers": ["1", "4", "3", "2"],
             "correctAnswer": "2"
         },
         {
             "questionNumber": 2,
             "question": "What is 2 + 2?",
-            "answers": ["1", "2", "3", "4"],
+            "answers": ["1", "2", "8", "4"],
             "correctAnswer": "4"
 
         },
@@ -42,8 +57,7 @@ var quizJson = {
 }
 
 var timer = {
-    start: () => {
-    },
+    start: () => {},
     stop: () => {
 
     }
