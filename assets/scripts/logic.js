@@ -85,16 +85,16 @@
     }
 
     //after I add more quizzes randomize
-    function randomQuiz() {
-        var quizzes = [quizJson.quiz1];
-        return quizzes[0];
-    }
-
     function startNewGame() {
         game = new Game(randomQuiz());
         resetColors();
         updateQuiz();
         $("#nextButton").prop("disabled", true);
+
+        function randomQuiz() {
+            var quizzes = [quizJson.quiz1];
+            return quizzes[0];
+        }
     }
 
     function nextQuestion() {
