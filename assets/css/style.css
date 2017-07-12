@@ -84,6 +84,6 @@ h1 {
 
 #confirmButton:disabled,
 #nextButton:disabled {
-    background: #eee;
+    background: #ccc;
     border: none;
 }
