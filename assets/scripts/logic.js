@@ -4,9 +4,10 @@
     var selectedElement = null;
     //Element colors
     var defaultColor = "white";
-    var selectedColor = "#e6e6e6";
+    var selectedColor = "#bfbfbf";
     var correctColor = "#009900";
     var wrongColor = "#e60000";
+    var hoverColor = "#e6e6e6";
 
     startNewGame();
 
@@ -19,6 +20,7 @@
         resetColors();
         selectedElement = $(e.currentTarget).css("background", selectedColor);
     });
+
 
     $("#confirmButton").click(() => {
         // If no answer is selected
@@ -46,6 +48,24 @@
         nextQuestion();
         $("#confirmButton").prop("disabled", false);
         $("#nextButton").prop("disabled", true);
+    });
+
+    //Hover logic
+    $(choiceElements).mouseenter(e => {
+        //ignore the selected element
+        if ($(e.currentTarget).attr("id") == $(selectedElement).attr("id"))
+            return;
+
+        $(e.currentTarget).css("background", hoverColor);
+    });
+
+    //reset background after mouse leaves
+    $(choiceElements).mouseleave(e => {
+        //ignore the selected element
+        if ($(e.currentTarget).attr("id") == $(selectedElement).attr("id"))
+            return;
+
+        $(e.currentTarget).css("background", defaultColor);
     });
 
     function checkAnswer() {
