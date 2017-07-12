@@ -35,7 +35,8 @@
         if (game.questionsLeft === 0) {
             var statsString = "";
             statsString += game.correct + " out of " + game.quiz.length + "\n";
-            statsString += Math.round(game.correct / game.quiz.length * 100) + "% correct";
+            statsString += Math.round(game.correct / game.quiz.length * 100) + "% correct\n";
+            statsString += "Hit OK to play again";
 
             alert(statsString);
             startNewGame();
