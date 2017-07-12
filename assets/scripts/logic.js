@@ -104,8 +104,8 @@
         //popuate the answer choices elements
         var answerChoiceIndex = 0;
         for (var i = 0; i < choiceElements.length; i++) {
-            var element = $(choiceElements[i]);
-            element.html(game.answers[answerChoiceIndex++]);
+            var choice = $(choiceElements[i]);
+            choice.html(game.answers[answerChoiceIndex++]);
         }
     }
 
