@@ -1,33 +1,60 @@
 ﻿$(document).ready(() => {
-    var game = new Game(quizJson.quiz1);
+    var game;
     var choiceElements = $("[id^=choice]").get();
     var selectedElement = null;
     var defaultColor = "white";
     var selectedColor = "gray";
+    var correctColor = "green";
+    var wrongColor = "red";
 
-    resetColors();
-    updateQuiz();
+    startNewGame();
 
+    //Change background of selected answer and set it to selected element
     $(choiceElements).click(e => {
+        //Return if user already selected a button
+        if ($("#confirmButton").prop("disabled"))
+            return;
+
         resetColors();
         selectedElement = $(e.currentTarget).css("background", selectedColor);
     });
 
-    //next button click handler
-    $("#nextButton").click(() => {
-        //If no answer is selected
+    $("#confirmButton").click(() => {
+        // If no answer is selected
         if (selectedElement === null) {
             alert("Please select an answer");
             return;
         }
 
-        game.nextQuestion();
-        $("#questionsLeft").html(game.questionsLeft);
-        updateQuiz();
-        resetColors();
-        selectedElement = null;
+        checkAnswer();
     });
-    
+
+    $("#nextButton").click(() => {
+        // if there 's no more questions left
+        if (game.questionsLeft === 0) {
+            alert("game over");
+            startNewGame();
+            return;
+        }
+
+        nextQuestion();
+        $("#confirmButton").prop("disabled", false);
+    });
+
+    function checkAnswer() {
+        var correct = choiceElements.filter(e => $(e).html() == game.correctAnswer)[0];
+        //highlight the correct answer with the correct color
+        $(correct).css("background", correctColor);
+
+        //If your answer was wrong, highlight it with the wrong color
+        if ($(correct).html() != $(selectedElement).html()) {
+            $(selectedElement).css("background", wrongColor);
+        }
+
+        $("#nextButton").prop("disabled", false);
+        $("#confirmButton").prop("disabled", true);
+    }
+
     //updates the quiz html
     function updateQuiz() {
         //populate question element
@@ -50,6 +77,27 @@
     function resetColors() {
         $(choiceElements).css("background", defaultColor);
     }
+
+    //after I add more quizzes randomize
+    function randomQuiz() {
+        var quizzes = [quizJson.quiz1];
+        return quizzes[0];
+    }
+
+    function startNewGame() {
+        game = new Game(quizJson.quiz1);
+        resetColors();
+        updateQuiz();
+        $("#nextButton").prop("disabled", true);
+    }
+
+    function nextQuestion() {
+        game.nextQuestion();
+        $("#questionsLeft").html(game.questionsLeft);
+        updateQuiz();
+        resetColors();
+        selectedElement = null;
+    }
 });
 
 //pass in quiz 1, 2 etc
@@ -59,7 +107,7 @@ function Game(quiz) {
     this.question = this.quiz[this.index].question;
     this.answers = this.quiz[this.index].answers;
     this.correctAnswer = this.quiz[this.index].correctAnswer;
-    this.questionsLeft = --this.quiz.length;
+    this.questionsLeft = this.quiz.length - 1;
 
     this.nextQuestion = () => {
         this.index++;
