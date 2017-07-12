@@ -3,7 +3,7 @@
     var choiceElements = $("[id^=choice]").get();
     var selectedElement = null;
 
-    //Colors
+    //colors
     var defaultColor = "white";
     var selectedColor = "#bfbfbf";
     var correctColor = "#009900";
