@@ -14,13 +14,12 @@
     //Change background of selected answer and set it to selected element
     $(choiceElements).click(e => {
         //Return if user already selected an answer and hit confirm
-        if ($("#confirmButton").prop("disabled"))
+        if (answerConfirmed())
             return;
 
         resetColors();
         selectedElement = $(e.currentTarget).css("background", selectedColor);
     });
-
 
     $("#confirmButton").click(() => {
         // If no answer is selected
@@ -52,6 +51,10 @@
 
     //Hover logic
     $(choiceElements).mouseenter(e => {
+        //Return if user already selected an answer and hit confirm
+        if (answerConfirmed())
+            return;
+
         //ignore the selected element
         if ($(e.currentTarget).attr("id") == $(selectedElement).attr("id"))
             return;
@@ -61,6 +64,10 @@
 
     //reset background after mouse leaves
     $(choiceElements).mouseleave(e => {
+        //Return if user already selected an answer and hit confirm
+        if (answerConfirmed())
+            return;
+
         //ignore the selected element
         if ($(e.currentTarget).attr("id") == $(selectedElement).attr("id"))
             return;
@@ -103,6 +110,13 @@
             var element = $(choiceElements[i]);
             element.html(game.answers[answerChoiceIndex++]);
         }
+    }
+
+    function answerConfirmed() {
+        if ($("#confirmButton").prop("disabled"))
+            return true;
+        else
+            return false;
     }
 
     //after I add more quizzes randomize
