@@ -36,6 +36,9 @@ h1 {
     padding: 20px;
 }
 
+.questionContainer {
+}
+
 .row>[id^=choice] {
     margin: 10px;
     padding: 50px;
@@ -51,16 +54,6 @@ h1 {
     font-size: 200%;
     font-weight: bold;
     text-align: center;
-}
-
-#choice2,
-#choice4 {
-    float: right;
-}
-
-#choice1,
-#choice3 {
-    float: left;
 }
 
 #question,
