@@ -4,7 +4,7 @@
     var selectedElement = null;
     //Element colors
     var defaultColor = "white";
-    var selectedColor = "#999";
+    var selectedColor = "#e6e6e6";
     var correctColor = "#009900";
     var wrongColor = "#e60000";
 
