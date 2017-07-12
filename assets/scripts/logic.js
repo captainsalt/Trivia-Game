@@ -131,7 +131,6 @@ function Game(quiz) {
     }
 }
 
-//make a constructor
 function Timer(interval) {
     
 }
