@@ -5,9 +5,9 @@
 
     //colors
     var defaultColor = "white";
-    var selectedColor = "#bfbfbf";
-    var correctColor = "#009900";
-    var wrongColor = "#e60000";
+    var selectedColor = "#999999";
+    var correctColor = "#b3ffb3";
+    var wrongColor = "#ff8080";
     var hoverColor = "#e6e6e6";
 
     startNewGame();
