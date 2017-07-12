@@ -77,3 +77,19 @@ h1 {
 #confirmButton {
     float: right;
 }
+
+#confirmButton,
+#nextButton {
+    padding: 10px;
+    margin: 5px 10px;
+    border: none;
+    color: white;
+    background: green;
+}
+
+#confirmButton:disabled,
+#nextButton:disabled {
+    background: red;
+    color: white;
+    border: none;
+}

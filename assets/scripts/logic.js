@@ -33,7 +33,11 @@
     $("#nextButton").click(() => {
         // if there 's no more questions left
         if (game.questionsLeft === 0) {
-            alert("game over");
+            var statsString = "";
+            statsString += game.correct + " out of " + game.quiz.length + "\n";
+            statsString += Math.round(game.correct / game.quiz.length * 100) + "% correct";
+
+            alert(statsString);
             startNewGame();
             return;
         }
@@ -128,13 +132,8 @@ function Game(quiz) {
 }
 
 //make a constructor
-var timer = {
-    start: () => {
-
-    },
-    stop: () => {
-
-    }
+function Timer(interval) {
+    
 }
 
 var quizJson = {
