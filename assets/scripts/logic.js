@@ -49,11 +49,8 @@
 
     //Hover logic
     $(choiceElements).mouseenter(e => {
-        if (answerConfirmed())
-            return;
-
-        //ignore the selected element
-        if ($(e.currentTarget).attr("id") == $(selectedElement).attr("id"))
+        if (answerConfirmed() ||
+            ($(e.currentTarget).attr("id") == $(selectedElement).attr("id"))) //Ignore if mouse enters selected element
             return;
 
         $(e.currentTarget).css("background", hoverColor);
@@ -61,11 +58,8 @@
 
     //reset background after mouse leaves
     $(choiceElements).mouseleave(e => {
-        if (answerConfirmed())
-            return;
-
-        //ignore the selected element
-        if ($(e.currentTarget).attr("id") == $(selectedElement).attr("id"))
+        if (answerConfirmed() ||
+            ($(e.currentTarget).attr("id") == $(selectedElement).attr("id"))) //ignore if mouse leaves selected element
             return;
 
         $(e.currentTarget).css("background", defaultColor);
