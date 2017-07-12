@@ -36,9 +36,6 @@ h1 {
     padding: 20px;
 }
 
-.questionContainer {
-}
-
 .row>[id^=choice] {
     margin: 10px;
     padding: 50px;
