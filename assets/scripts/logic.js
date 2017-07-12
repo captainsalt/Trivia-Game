@@ -3,10 +3,10 @@
     var choiceElements = $("[id^=choice]").get();
     var selectedElement = null;
     //Element colors
-    var defaultColor = "#ccc";
+    var defaultColor = "white";
     var selectedColor = "#999";
-    var correctColor = "green";
-    var wrongColor = "red";
+    var correctColor = "#009900";
+    var wrongColor = "#e60000";
 
     startNewGame();
 
