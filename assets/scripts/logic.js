@@ -3,8 +3,8 @@
     var choiceElements = $("[id^=choice]").get();
     var selectedElement = null;
     //Element colors
-    var defaultColor = "white";
-    var selectedColor = "gray";
+    var defaultColor = "#ccc";
+    var selectedColor = "#999";
     var correctColor = "green";
     var wrongColor = "red";
 
@@ -129,10 +129,6 @@ function Game(quiz) {
         this.answers = this.quiz[this.index].answers;
         this.correctAnswer = this.quiz[this.index].correctAnswer;
     }
-}
-
-function Timer(interval) {
-    
 }
 
 var quizJson = {

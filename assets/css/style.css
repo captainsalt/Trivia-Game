@@ -74,12 +74,13 @@ h1 {
     margin: 5px 10px;
     border: none;
     color: white;
-    background: green;
+    background: black;
+    border-radius: 5px;
 }
 
 #confirmButton:disabled,
 #nextButton:disabled {
-    background: red;
+    background: white;
     color: white;
     border: none;
 }
