@@ -76,7 +76,6 @@ h1 {
 #nextButton {
     padding: 10px;
     margin: 5px 10px;
-    border: none;
     color: white;
     background: black;
     border-radius: 5px;
@@ -86,5 +85,4 @@ h1 {
 #nextButton:disabled {
     background: white;
     color: white;
-    border: none;
 }
