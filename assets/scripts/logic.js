@@ -2,7 +2,8 @@
     var game;
     var choiceElements = $("[id^=choice]").get();
     var selectedElement = null;
-    //Element colors
+
+    //Colors
     var defaultColor = "white";
     var selectedColor = "#bfbfbf";
     var correctColor = "#009900";
@@ -11,9 +12,8 @@
 
     startNewGame();
 
-    //Change background of selected answer and set it to selected element
+    //set selected element to clicked element and change color
     $(choiceElements).click(e => {
-        //Return if user already selected an answer and hit confirm
         if (answerConfirmed())
             return;
 
@@ -22,7 +22,6 @@
     });
 
     $("#confirmButton").click(() => {
-        // If no answer is selected
         if (selectedElement === null) {
             alert("Please select an answer");
             return;
@@ -32,7 +31,6 @@
     });
 
     $("#nextButton").click(() => {
-        // if there 's no more questions left
         if (game.questionsLeft === 0) {
             var statsString = "";
             statsString += game.correct + " out of " + game.quiz.length + "\n";
@@ -51,7 +49,6 @@
 
     //Hover logic
     $(choiceElements).mouseenter(e => {
-        //Return if user already selected an answer and hit confirm
         if (answerConfirmed())
             return;
 
@@ -64,7 +61,6 @@
 
     //reset background after mouse leaves
     $(choiceElements).mouseleave(e => {
-        //Return if user already selected an answer and hit confirm
         if (answerConfirmed())
             return;
 
@@ -91,6 +87,7 @@
         $("#confirmButton").prop("disabled", true);
     }
 
+    //populates the quiz 
     function updateQuiz() {
         //populate question element
         var question = $("#question");
@@ -112,6 +109,7 @@
         }
     }
 
+    // checks if the confirm button was pressed
     function answerConfirmed() {
         if ($("#confirmButton").prop("disabled"))
             return true;
