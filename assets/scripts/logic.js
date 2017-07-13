@@ -5,65 +5,14 @@
 
     //colors
     var defaultColor = "white";
-    var selectedColor = "#999999";
+    var selectedColor = "#999";
     var correctColor = "#b3ffb3";
     var wrongColor = "#ff8080";
     var hoverColor = "#e6e6e6";
 
     startNewGame();
-
-    //set selected element to clicked element and change color
-    $(choiceElements).click(e => {
-        if (answerConfirmed())
-            return;
-
-        resetColors();
-        selectedElement = $(e.currentTarget).css("background", selectedColor);
-    });
-
-    $("#confirmButton").click(() => {
-        if (selectedElement === null) {
-            alert("Please select an answer");
-            return;
-        }
-
-        checkAnswer();
-    });
-
-    $("#nextButton").click(() => {
-        if (game.questionsLeft === 0) {
-            var statsString = "";
-            statsString += game.correct + " out of " + game.quiz.length + "\n";
-            statsString += Math.round(game.correct / game.quiz.length * 100) + "% correct\n";
-            statsString += "Hit OK to play again";
-
-            alert(statsString);
-            startNewGame();
-            return;
-        }
-
-        nextQuestion();
-        $("#confirmButton").prop("disabled", false);
-        $("#nextButton").prop("disabled", true);
-    });
-
-    //Hover logic
-    $(choiceElements).mouseenter(e => {
-        if (answerConfirmed() ||
-            ($(e.currentTarget).attr("id") == $(selectedElement).attr("id"))) //Ignore if mouse enters selected element
-            return;
-
-        $(e.currentTarget).css("background", hoverColor);
-    });
-
-    //reset background after mouse leaves
-    $(choiceElements).mouseleave(e => {
-        if (answerConfirmed() ||
-            ($(e.currentTarget).attr("id") == $(selectedElement).attr("id"))) //ignore if mouse leaves selected element
-            return;
-
-        $(e.currentTarget).css("background", defaultColor);
-    });
+    hookIntoEvents();
+    startTimer();
 
     function checkAnswer() {
         var correct = choiceElements.filter(e => $(e).html() == game.correctAnswer)[0];
@@ -135,7 +84,63 @@
     function resetColors() {
         $(choiceElements).css("background", defaultColor);
     }
+
+    function hookIntoEvents() {
+        //set selected element to clicked element and change color
+        $(choiceElements).click(e => {
+            if (answerConfirmed())
+                return;
+
+            resetColors();
+            selectedElement = $(e.currentTarget).css("background", selectedColor);
+        });
+
+        $("#confirmButton").click(() => {
+            if (selectedElement === null) {
+                alert("Please select an answer");
+                return;
+            }
+
+            checkAnswer();
+        });
+
+        $("#nextButton").click(() => {
+            if (game.questionsLeft === 0) {
+                var statsString = "";
+                statsString += game.correct + " out of " + game.quiz.length + "\n";
+                statsString += Math.round(game.correct / game.quiz.length * 100) + "% correct\n";
+                statsString += "Hit OK to play again";
+
+                alert(statsString);
+                startNewGame();
+                return;
+            }
+
+            nextQuestion();
+            $("#confirmButton").prop("disabled", false);
+            $("#nextButton").prop("disabled", true);
+        });
+
+        //Hover logic
+        $(choiceElements).mouseenter(e => {
+            if (answerConfirmed() ||
+                ($(e.currentTarget).attr("id") == $(selectedElement).attr("id"))) //Ignore if mouse enters selected element
+                return;
+
+            $(e.currentTarget).css("background", hoverColor);
+        });
+
+        //reset background after mouse leaves
+        $(choiceElements).mouseleave(e => {
+            if (answerConfirmed() ||
+                ($(e.currentTarget).attr("id") == $(selectedElement).attr("id"))) //ignore if mouse leaves selected element
+                return;
+
+            $(e.currentTarget).css("background", defaultColor);
+        });
+    }
 });
+
 
 function Game(quiz) {
     this.quiz = quiz;
