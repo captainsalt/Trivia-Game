@@ -2,6 +2,8 @@
     var game;
     var choiceElements = $("[id^=choice]").get();
     var selectedElement = null;
+    var questionTime;
+    var timer;
 
     //colors
     var defaultColor = "white";
@@ -11,16 +13,18 @@
     var hoverColor = "#e6e6e6";
 
     startNewGame();
+    //hook into button click and hover events
     hookIntoEvents();
-    startTimer();
 
     function checkAnswer() {
-        var correct = choiceElements.filter(e => $(e).html() == game.correctAnswer)[0];
+        var correct = choiceElements.filter(e => $(e).html() === game.correctAnswer)[0];
+
         //highlight the correct answer with the correct color
         $(correct).css("background", correctColor);
 
-        //If your answer was wrong, highlight it with the wrong color
-        if ($(correct).html() != $(selectedElement).html()) {
+        if ($(correct).html() != $(selectedElement).html() || //if the answer is wrong
+            selectedElement == null) { // if user didn't select an answer in time
+            //highlight the wrong answer user selected
             $(selectedElement).css("background", wrongColor);
             game.wrong++;
         } else
@@ -40,7 +44,7 @@
         $("#questionsLeft").html(game.questionsLeft);
 
         //update percentage
-        var percentage = Math.round(game.correct / game.numberOfquestionsAsked * 100);
+        var percentage = Math.round(game.correct / (game.correct + game.wrong) * 100);
         var displayPercent = isNaN(percentage) ? 0 : percentage;
         $("#percentage").html(displayPercent + "%");
 
@@ -54,7 +58,7 @@
 
     // checks if the confirm button was pressed
     function answerConfirmed() {
-        if ($("#confirmButton").prop("disabled"))
+        if ($("#confirmButton").prop("disabled")) // if the confirm button is disabled
             return true;
         else
             return false;
@@ -65,7 +69,10 @@
         game = new Game(randomQuiz());
         resetColors();
         updateQuiz();
+        startCountdown(game.questionTime);
+
         $("#nextButton").prop("disabled", true);
+        $("#confirmButton").prop("disabled", false);
 
         function randomQuiz() {
             var quizzes = [quizJson.quiz1];
@@ -101,6 +108,7 @@
                 return;
             }
 
+            stopCountdown();
             checkAnswer();
         });
 
@@ -117,6 +125,7 @@
             }
 
             nextQuestion();
+            startCountdown(game.questionTime);
             $("#confirmButton").prop("disabled", false);
             $("#nextButton").prop("disabled", true);
         });
@@ -124,7 +133,7 @@
         //Hover logic
         $(choiceElements).mouseenter(e => {
             if (answerConfirmed() ||
-                ($(e.currentTarget).attr("id") == $(selectedElement).attr("id"))) //Ignore if mouse enters selected element
+                ($(e.currentTarget).attr("id") === $(selectedElement).attr("id"))) //If mouse enters selected answer
                 return;
 
             $(e.currentTarget).css("background", hoverColor);
@@ -133,14 +142,36 @@
         //reset background after mouse leaves
         $(choiceElements).mouseleave(e => {
             if (answerConfirmed() ||
-                ($(e.currentTarget).attr("id") == $(selectedElement).attr("id"))) //ignore if mouse leaves selected element
+                ($(e.currentTarget).attr("id") === $(selectedElement).attr("id"))) //If mouse leaves selected answer
                 return;
 
             $(e.currentTarget).css("background", defaultColor);
         });
     }
-});
 
+    function startCountdown(time) {
+        var timerElement = $("#timer");
+        questionTime = time;
+
+        //update the timerElement to show the question time
+        timerElement.html(questionTime); 
+
+        timer = new Timer(questionTime * 100);
+        timer.Tick = () => {
+            $("#timer").html(--questionTime);
+
+            if (questionTime === 0) { // if time runs out
+                stopCountdown();
+                checkAnswer();
+            }
+        }
+        timer.Start();
+    }
+
+    function stopCountdown() {
+        timer.Stop();
+    }
+});
 
 function Game(quiz) {
     this.quiz = quiz;
@@ -151,23 +182,56 @@ function Game(quiz) {
     this.questionsLeft = this.quiz.length - 1;
     this.correct = 0;
     this.wrong = 0;
-    this.numberOfquestionsAsked = 0;
+    this.questionTime = (this.quiz[this.index].questionTime == null) ? 10 : this.quiz[this.index].questionTime;
 
     this.nextQuestion = () => {
         this.index++;
-        this.numberOfquestionsAsked++;
         this.questionsLeft--;
         this.question = this.quiz[this.index].question;
         this.answers = this.quiz[this.index].answers;
         this.correctAnswer = this.quiz[this.index].correctAnswer;
+        this.questionTime = (this.quiz[this.index].questionTime == null) ? 10 : this.quiz[this.index].questionTime;
     }
 }
+
+// Declaring class "Timer"
+function Timer(interval = 10000) {
+    // Property: Frequency of elapse event of the timer in millisecond
+    this.Interval = interval;
+
+    // Property: Whether the timer is enable or not
+    this.Enable = false;
+
+    // Event: Timer tick
+    this.Tick = null;
+
+    // Member variable: Hold interval id of the timer
+    var timerId = 0;
+
+    // Member variable: Hold instance of this class
+    var thisObject;
+
+    // Function: Start the timer
+    this.Start = function() {
+        this.Enable = true;
+
+        thisObject = this;
+        if (thisObject.Enable)
+            thisObject.timerId = setInterval(() => thisObject.Tick(), thisObject.Interval);
+    };
+
+    // Function: Stops the timer
+    this.Stop = function() {
+        thisObject.Enable = false;
+        clearInterval(thisObject.timerId);
+    };
+};
 
 var quizJson = {
     "quiz1": [{
             "question": "What is 1 + 1?",
             "answers": ["2", "4", "3", "1"],
-            "correctAnswer": "2"
+            "correctAnswer": "2",
         },
         {
             "question": "What is 2 + 2?",
@@ -182,12 +246,14 @@ var quizJson = {
         {
             "question": "What is 6/2(1+2)?",
             "answers": ["1", "2", "9", "8"],
-            "correctAnswer": "9"
+            "correctAnswer": "9",
+            "questionTime" : "30"
         },
         {
             "question": "What is 10 * 2(5 * (5 + 1))?",
             "answers": ["520", "600", "521", "530"],
-            "correctAnswer": "600"
+            "correctAnswer": "600",
+            "questionTime" : "20"
         },
     ],
 
