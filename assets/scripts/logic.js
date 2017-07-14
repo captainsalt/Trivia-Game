@@ -161,6 +161,10 @@
             $("#timer").html(--questionTime);
 
             if (questionTime === 0) { // if time runs out
+                //Erase the selected answer if the user didn't confirm
+                selectedElement = null;
+                resetColors();
+
                 stopCountdown();
                 checkAnswer();
             }
