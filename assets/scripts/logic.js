@@ -17,12 +17,12 @@
     hookIntoEvents();
 
     function checkAnswer() {
-        var correct = choiceElements.filter(e => $(e).html() === game.correctAnswer)[0];
+        var correctAnswer = $(choiceElements.filter(e => $(e).html() === game.correctAnswer)[0]);
 
         //highlight the correct answer with the correct color
-        $(correct).css("background", correctColor);
+        correctAnswer.css("background", correctColor);
 
-        if ($(correct).html() != $(selectedElement).html() || //if the answer is wrong
+        if (correctAnswer.html() != $(selectedElement).html() || //if the answer is wrong
             selectedElement == null) { // if user didn't select an answer in time
             //highlight the wrong answer user selected
             $(selectedElement).css("background", wrongColor);
