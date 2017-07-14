@@ -3,7 +3,7 @@
     var choiceElements = $("[id^=choice]").get();
     var selectedElement = null;
     var questionTime;
-    var timer;
+    var timer = new Timer();
 
     //colors
     var defaultColor = "white";
@@ -37,8 +37,7 @@
     //populates the quiz 
     function updateQuiz() {
         //populate question element
-        var question = $("#question");
-        question.html(game.question);
+        $("#question").html(game.question);
 
         //populate questions left element
         $("#questionsLeft").html(game.questionsLeft);
@@ -90,6 +89,32 @@
 
     function resetColors() {
         $(choiceElements).css("background", defaultColor);
+    }
+
+    function startCountdown(time) {
+        var timerElement = $("#timer");
+        questionTime = time;
+
+        //update the timerElement to show the question time
+        timerElement.html(questionTime);
+
+        timer.Tick = () => {
+            $("#timer").html(--questionTime);
+
+            if (questionTime === 0) { // if time runs out
+                //Erase the selected answer if the user didn't confirm
+                selectedElement = null;
+                resetColors();
+
+                stopCountdown();
+                checkAnswer();
+            }
+        }
+        timer.Start();
+    }
+
+    function stopCountdown() {
+        timer.Stop();
     }
 
     function hookIntoEvents() {
@@ -148,33 +173,6 @@
             $(e.currentTarget).css("background", defaultColor);
         });
     }
-
-    function startCountdown(time) {
-        var timerElement = $("#timer");
-        questionTime = time;
-
-        //update the timerElement to show the question time
-        timerElement.html(questionTime); 
-
-        timer = new Timer(questionTime * 100);
-        timer.Tick = () => {
-            $("#timer").html(--questionTime);
-
-            if (questionTime === 0) { // if time runs out
-                //Erase the selected answer if the user didn't confirm
-                selectedElement = null;
-                resetColors();
-
-                stopCountdown();
-                checkAnswer();
-            }
-        }
-        timer.Start();
-    }
-
-    function stopCountdown() {
-        timer.Stop();
-    }
 });
 
 function Game(quiz) {
@@ -199,9 +197,9 @@ function Game(quiz) {
 }
 
 // Declaring class "Timer"
-function Timer(interval = 10000) {
+function Timer() {
     // Property: Frequency of elapse event of the timer in millisecond
-    this.Interval = interval;
+    this.Interval = 1000;
 
     // Property: Whether the timer is enable or not
     this.Enable = false;
@@ -251,13 +249,13 @@ var quizJson = {
             "question": "What is 6/2(1+2)?",
             "answers": ["1", "2", "9", "8"],
             "correctAnswer": "9",
-            "questionTime" : "30"
+            "questionTime": "25"
         },
         {
             "question": "What is 10 * 2(5 * (5 + 1))?",
             "answers": ["520", "600", "521", "530"],
             "correctAnswer": "600",
-            "questionTime" : "20"
+            "questionTime": "30"
         },
     ],
 
