@@ -235,22 +235,24 @@ var quizJson = {
             "question": "What is 1 + 1?",
             "answers": ["2", "4", "3", "1"],
             "correctAnswer": "2",
+            "questionTime": "5"
         },
         {
             "question": "What is 2 + 2?",
             "answers": ["1", "2", "8", "4"],
-            "correctAnswer": "4"
+            "correctAnswer": "4",
+            "questionTime": "5"
         },
         {
             "question": "What is 7 * 3?",
             "answers": ["10", "21", "30", "17"],
-            "correctAnswer": "21"
+            "correctAnswer": "21",
+            "questionTime": "5"
         },
         {
             "question": "What is 6/2(1+2)?",
             "answers": ["1", "2", "9", "8"],
             "correctAnswer": "9",
-            "questionTime": "25"
         },
         {
             "question": "What is 10 * 2(5 * (5 + 1))?",
