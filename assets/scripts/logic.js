@@ -75,7 +75,9 @@
 
         function randomQuiz() {
             var quizzes = [quizJson.quiz1];
-            return quizzes[0];
+            var randomIndex = Math.floor(Math.random() * quizzes.length);
+
+            return quizzes[randomIndex];
         }
     }
 
