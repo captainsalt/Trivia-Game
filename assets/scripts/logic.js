@@ -128,6 +128,7 @@
             selectedElement = $(e.currentTarget).css("background", selectedColor);
         });
 
+        //Confirm button click
         $("#confirmButton").click(() => {
             if (selectedElement === null) {
                 alert("Please select an answer");
@@ -138,7 +139,8 @@
             checkAnswer();
         });
 
-        $("#nextButton").click(() => {
+        //Next button click
+        $("#nextButton").click((e) => {
             if (game.questionsLeft === 0) {
                 var statsString = "";
                 statsString += game.correct + " out of " + game.quiz.length + "\n";
@@ -150,13 +152,16 @@
                 return;
             }
 
+            if (game.questionsLeft === 1)
+                $(e.currentTarget).html("Show Results");
+
             nextQuestion();
             startCountdown(game.questionTime);
             $("#confirmButton").prop("disabled", false);
             $("#nextButton").prop("disabled", true);
         });
 
-        //Hover logic
+        //Mouse enters an answer
         $(choiceElements).mouseenter(e => {
             if (answerConfirmed() ||
                 ($(e.currentTarget).attr("id") === $(selectedElement).attr("id"))) //If mouse enters selected answer
@@ -165,7 +170,7 @@
             $(e.currentTarget).css("background", hoverColor);
         });
 
-        //reset background after mouse leaves
+        //Mouse leaves an answer
         $(choiceElements).mouseleave(e => {
             if (answerConfirmed() ||
                 ($(e.currentTarget).attr("id") === $(selectedElement).attr("id"))) //If mouse leaves selected answer
