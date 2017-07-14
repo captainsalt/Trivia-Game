@@ -69,8 +69,10 @@
         updateQuiz();
         startCountdown(game.questionTime);
 
-        $("#nextButton").prop("disabled", true);
-        $("#confirmButton").prop("disabled", false);
+        $("#nextButton")
+            .prop("disabled", true)
+            .html("Next Question");
+        $("#confirmButton").prop("disabled", false)
 
         function randomQuiz() {
             var quizzes = [quizJson.quiz1];
