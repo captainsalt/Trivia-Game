@@ -63,7 +63,6 @@
             return false;
     }
 
-    //after I add more quizzes randomize
     function startNewGame() {
         game = new Game(randomQuiz());
         resetColors();
