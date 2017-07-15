@@ -204,24 +204,14 @@ function Game(quiz) {
     }
 }
 
-// Declaring class "Timer"
 function Timer() {
-    // Property: Frequency of elapse event of the timer in millisecond
-    this.Interval = 1000;
-
-    // Property: Whether the timer is enable or not
-    this.Enable = false;
-
-    // Event: Timer tick
-    this.Tick = null;
-
-    // Member variable: Hold interval id of the timer
     var timerId = 0;
-
-    // Member variable: Hold instance of this class
     var thisObject;
 
-    // Function: Start the timer
+    this.Interval = 1000;
+    this.Enable = false;
+    this.Tick = null;
+
     this.Start = function() {
         this.Enable = true;
 
@@ -230,7 +220,6 @@ function Timer() {
             thisObject.timerId = setInterval(() => thisObject.Tick(), thisObject.Interval);
     };
 
-    // Function: Stops the timer
     this.Stop = function() {
         thisObject.Enable = false;
         clearInterval(thisObject.timerId);
