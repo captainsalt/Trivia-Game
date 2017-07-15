@@ -192,7 +192,7 @@ function Game(quiz) {
     this.questionsLeft = this.quiz.length - 1;
     this.correct = 0;
     this.wrong = 0;
-    this.questionTime = (this.quiz[this.index].questionTime == null) ? 10 : this.quiz[this.index].questionTime;
+    this.questionTime = this.quiz[this.index].questionTime || 10; 
 
     this.nextQuestion = () => {
         this.index++;
@@ -200,7 +200,7 @@ function Game(quiz) {
         this.question = this.quiz[this.index].question;
         this.answers = this.quiz[this.index].answers;
         this.correctAnswer = this.quiz[this.index].correctAnswer;
-        this.questionTime = (this.quiz[this.index].questionTime == null) ? 10 : this.quiz[this.index].questionTime;
+        this.questionTime = this.quiz[this.index].questionTime || 10; 
     }
 }
 
