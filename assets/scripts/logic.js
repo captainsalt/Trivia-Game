@@ -197,7 +197,6 @@ function Game(quiz) {
     }
 }
 
-// Declaring class "Timer"
 function Timer() {
     var timerId = 0;
     var thisObject;
