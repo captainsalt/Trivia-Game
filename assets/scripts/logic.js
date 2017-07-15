@@ -142,7 +142,7 @@
         });
 
         //Next button click
-        $("#nextButton").click((e) => {
+        $("#nextButton").click(e => {
             if (game.questionsLeft === 0) {
                 var statsString = "";
                 statsString += game.correct + " out of " + game.quiz.length + "\n";
